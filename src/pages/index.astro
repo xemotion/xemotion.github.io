@@ -11,6 +11,8 @@ import IconRss from "@/assets/icons/IconRss.svg";
 import IconArrowRight from "@/assets/icons/IconArrowRight.svg";
 import { SITE } from "@/config";
 import { SOCIALS } from "@/constants";
+import { TOPICS } from "@/data/topics";
+import TopicIcon from "@/components/TopicIcon.astro";
 
 const posts = await getCollection("blog");
 
@@ -18,33 +20,10 @@ const sortedPosts = getSortedPosts(posts);
 const featuredPosts = sortedPosts.filter(({ data }) => data.featured);
 const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
 
-const TOPICS = [
-  {
-    group: "Tech",
-    items: [
-      { label: "AI", slug: "ai" },
-      { label: "Quant", slug: "quant" },
-      { label: "Vibe Coding", slug: "vibe-coding" },
-    ],
-  },
-  {
-    group: "Life",
-    items: [
-      { label: "English", slug: "english" },
-      { label: "Study", slug: "study" },
-      { label: "Thought", slug: "thought" },
-    ],
-  },
-  {
-    group: "Hobby",
-    items: [
-      { label: "Book", slug: "book" },
-      { label: "Exhibition", slug: "exhibition" },
-      { label: "Sport", slug: "sport" },
-      { label: "Doodle", slug: "doodle" },
-    ],
-  },
-];
+const TOPIC_GROUPS = (["Tech", "Life", "Hobby"] as const).map(group => ({
+  group,
+  items: TOPICS.filter(t => t.group === group),
+}));
 ---
 
 <Layout>
@@ -84,17 +63,21 @@ const TOPICS = [
       <h2 class="mb-6 text-2xl font-semibold tracking-wide">Topics</h2>
       <div class="grid grid-cols-1 gap-4 sm:grid-cols-3">
         {
-          TOPICS.map(topic => (
+          TOPIC_GROUPS.map(({ group, items }) => (
             <div class="rounded-lg border border-border p-5 transition-colors hover:border-accent">
-              <h3 class="mb-3 text-lg font-semibold">{topic.group}</h3>
-              <ul class="space-y-1.5">
-                {topic.items.map(item => (
+              <h3 class="mb-3 text-lg font-semibold">{group}</h3>
+              <ul class="space-y-2">
+                {items.map(item => (
                   <li>
                     <a
-                      href={`/tags/${item.slug}/`}
-                      class="inline-block text-sm opacity-80 transition-colors hover:text-accent hover:opacity-100"
+                      href={`/topics/${item.slug}/`}
+                      class="group inline-flex items-center gap-2 text-sm opacity-80 transition-colors hover:text-accent hover:opacity-100"
                     >
-                      {item.label}
+                      <TopicIcon
+                        type={item.slug}
+                        class="size-4 text-accent/70 transition-colors group-hover:text-accent"
+                      />
+                      <span>{item.title}</span>
                     </a>
                   </li>
                 ))}

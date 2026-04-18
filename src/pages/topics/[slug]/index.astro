@@ -1,0 +1,55 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+import Main from "@/layouts/Main.astro";
+import Card from "@/components/Card.astro";
+import TopicIcon from "@/components/TopicIcon.astro";
+import getSortedPosts from "@/utils/getSortedPosts";
+import { slugifyAll } from "@/utils/slugify";
+import { SITE } from "@/config";
+import { TOPICS, getTopicBySlug } from "@/data/topics";
+
+export async function getStaticPaths() {
+  return TOPICS.map(topic => ({
+    params: { slug: topic.slug },
+    props: { topic },
+  }));
+}
+
+const { topic } = Astro.props;
+const posts = await getCollection("blog");
+const topicPosts = getSortedPosts(
+  posts.filter(post => slugifyAll(post.data.tags).includes(topic.tag))
+);
+---
+
+<Layout title={`${topic.title} | ${SITE.title}`}>
+  <Header />
+  <Main pageTitle={topic.title} pageDesc={topic.desc}>
+    <div
+      slot="title"
+      class="mb-2 flex items-center gap-3"
+    >
+      <TopicIcon type={topic.slug} class="size-8 text-accent" />
+      <h1 class="text-2xl font-semibold sm:text-3xl">{topic.title}</h1>
+    </div>
+
+    {
+      topicPosts.length > 0 ? (
+        <ul>
+          {topicPosts.map(data => (
+            <Card {...data} />
+          ))}
+        </ul>
+      ) : (
+        <div class="flex flex-col items-center gap-3 py-16 text-center opacity-70">
+          <p class="text-3xl font-mono">{topic.empty}</p>
+          <p class="text-sm">이 주제의 글은 아직 없어요.</p>
+        </div>
+      )
+    }
+  </Main>
+  <Footer />
+</Layout>

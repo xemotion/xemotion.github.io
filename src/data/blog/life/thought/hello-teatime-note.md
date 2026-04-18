@@ -5,7 +5,7 @@ pubDatetime: 2026-04-18T10:00:00+09:00
 tags:
   - life
   - thought
-draft: true
+draft: false
 featured: true
 ---
 
