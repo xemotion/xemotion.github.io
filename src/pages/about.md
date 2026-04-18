@@ -44,5 +44,4 @@ title: "About"
 
 ### Contact
 
-- **Email**: [tjseoster@gmail.com](mailto:tjseoster@gmail.com)
 - **GitHub**: [@xemotion](https://github.com/xemotion)

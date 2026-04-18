@@ -1,0 +1,95 @@
+---
+/**
+ * Giscus — GitHub Discussions 기반 댓글
+ *
+ * 첫 실행 전에 해야 할 일 (한 번만):
+ * 1. repo Settings → General → Features 에서 "Discussions" 켜기
+ * 2. https://github.com/apps/giscus 설치 (xemotion.github.io 만 허용해도 됨)
+ * 3. https://giscus.app/ko 접속해서 아래 값 발급:
+ *    - Repository ID   → GISCUS.repoId
+ *    - Category ID     → GISCUS.categoryId
+ *    - Category 이름    → GISCUS.category (예: "Announcements")
+ * 4. 아래 GISCUS 오브젝트에 값 채워넣기
+ *
+ * 값이 placeholder 상태면 UI상으론 에러창이 뜨지만 사이트 작동에는 지장 없음.
+ */
+
+const GISCUS = {
+  repo: "xemotion/xemotion.github.io",
+  repoId: "REPLACE_ME_WITH_REPO_ID",
+  category: "Announcements",
+  categoryId: "REPLACE_ME_WITH_CATEGORY_ID",
+  mapping: "pathname",
+  strict: "0",
+  reactionsEnabled: "1",
+  emitMetadata: "0",
+  inputPosition: "bottom",
+  lang: "ko",
+  loading: "lazy",
+} as const;
+---
+
+<section
+  id="giscus-comments"
+  class="mt-12"
+  data-pagefind-ignore
+  aria-label="Comments"
+>
+  <h2 class="mb-4 text-xl font-semibold tracking-wide">Comments</h2>
+  <div id="giscus-container"></div>
+</section>
+
+<script
+  is:inline
+  define:vars={{ GISCUS }}
+>
+  // Initial render — pick giscus theme based on site theme
+  function getGiscusTheme() {
+    return document.firstElementChild?.getAttribute("data-theme") === "dark"
+      ? "dark"
+      : "light";
+  }
+
+  function renderGiscus() {
+    const container = document.getElementById("giscus-container");
+    if (!container) return;
+    container.innerHTML = "";
+
+    const script = document.createElement("script");
+    script.src = "https://giscus.app/client.js";
+    script.crossOrigin = "anonymous";
+    script.async = true;
+    script.setAttribute("data-repo", GISCUS.repo);
+    script.setAttribute("data-repo-id", GISCUS.repoId);
+    script.setAttribute("data-category", GISCUS.category);
+    script.setAttribute("data-category-id", GISCUS.categoryId);
+    script.setAttribute("data-mapping", GISCUS.mapping);
+    script.setAttribute("data-strict", GISCUS.strict);
+    script.setAttribute("data-reactions-enabled", GISCUS.reactionsEnabled);
+    script.setAttribute("data-emit-metadata", GISCUS.emitMetadata);
+    script.setAttribute("data-input-position", GISCUS.inputPosition);
+    script.setAttribute("data-theme", getGiscusTheme());
+    script.setAttribute("data-lang", GISCUS.lang);
+    script.setAttribute("data-loading", GISCUS.loading);
+    container.appendChild(script);
+  }
+
+  renderGiscus();
+
+  // Re-render on Astro view transitions (SPA-style navigation)
+  document.addEventListener("astro:after-swap", renderGiscus);
+
+  // Sync theme toggling with giscus iframe
+  const themeObserver = new MutationObserver(() => {
+    const iframe = document.querySelector("iframe.giscus-frame");
+    if (!iframe) return;
+    iframe.contentWindow?.postMessage(
+      { giscus: { setConfig: { theme: getGiscusTheme() } } },
+      "https://giscus.app"
+    );
+  });
+  themeObserver.observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ["data-theme"],
+  });
+</script>
