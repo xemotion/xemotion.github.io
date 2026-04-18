@@ -44,6 +44,18 @@
 
 ---
 
+## 🔧 블로그 기능 TODO
+
+- [ ] **방문자 수 추적** — Cloudflare Workers + KV로 직접 구현
+      - 이미 Analytics 컴포넌트 scaffold 있음 (SITE.goatCounter 채우면 GoatCounter도 가능)
+      - 자체 구현 루트: Worker 만들기 → KV 연결 → 블로그 `/dashboard` 페이지 붙이기
+      - 참고: https://developers.cloudflare.com/workers/
+- [ ] **Giscus 댓글 활성화** — Discussions 켜고 giscus.app에서 ID 받아 src/components/Giscus.astro의 REPLACE_ME 채우기
+- [ ] **댓글 모더레이션 봇** — 악플 자동 처리 (Giscus + GitHub Actions + Claude API)
+- [ ] **대시보드 페이지** — 방문자 수 + 댓글 수 통합 표시
+
+---
+
 ## ✍️ 글쓰기 체크리스트
 
 새 글 시작할 때:
