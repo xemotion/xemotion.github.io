@@ -3,35 +3,46 @@ layout: ../layouts/AboutLayout.astro
 title: "About"
 ---
 
-AstroPaper is a minimal, accessible and SEO-friendly blog theme built with [Astro](https://astro.build/) and [Tailwind CSS](https://tailwindcss.com/).
+## 안녕하세요, HY입니다
 
-![Astro Paper](public/astropaper-og.jpg)
+> 최신 기술을 좋아하고, 바이브 코딩으로 아이디어를 빠르게 현실로 만드는 걸 즐깁니다.
 
-AstroPaper provides a solid foundation for blogs, or even portfolios\_ with full markdown support, built-in dark mode, and a clean layout that works out-of-the-box.
+---
 
-The blog posts in this theme also serve as guides, docs or example articles\_ making AstroPaper a flexible starting point for your next content-driven site.
+### Tech
 
-## Features
+- **바이브 코딩 (Vibe Coding)** — AI와 함께 빠르게 만들고 반복하는 개발 스타일
+- 새로 나오는 기술은 일단 써보고 직접 검증해보는 편
+- <!-- 추가하고 싶으면 여기에 -->
 
-AstroPaper comes with a set of useful features that make content publishing easy and effective:
+#### 주로 쓰는 스택
 
-- SEO-friendly
-- Fast performance
-- Light & dark mode
-- Highly customizable
-- Organizable blog posts
-- Responsive & accessible
-- Static search with [PageFind](https://pagefind.app/)
-- Automatic social image generation
+- **Language**: Python
+- **Tools**: Claude Code, Cursor, 최신 AI 툴 닥치는 대로
+- **Currently learning**: <!-- 요즘 공부하는 거 -->
 
-and so much more.
+#### 이 블로그는
 
-## Show your support
+바이브 코딩하면서 부딪힌 것들, 공부하면서 얻은 생각들을 솔직하게 기록하는 공간입니다.
 
-If you like [AstroPaper](https://github.com/satnaing/astro-paper), consider giving it a star ⭐️.
+- 새 기술 써본 후기 & 트러블슈팅
+- 스터디 내용 정리 & 느낀 점
+- 가끔은 잡생각
 
-Found a bug 🐛 or have an improvement ✨ in mind? Feel free to open an [issue](https://github.com/satnaing/astro-paper/issues), submit a [pull request](https://github.com/satnaing/astro-paper/pulls) or start a [discussion](https://github.com/satnaing/astro-paper/discussions).
+---
 
-If you find this theme helpful, you can also [sponsor me on GitHub](https://github.com/sponsors/satnaing) or [buy me a coffee](https://buymeacoffee.com/satnaing) to show your support — every penny counts.
+### Hobby
 
-Kyay zuu! 🙏🏼
+> 일 얘기만 하면 재미없으니까
+
+- **책** — 과학책 위주 (우주, 물리, 생물 뭐든)
+- **전시** — 미술/사진/과학 전시 둘러보기
+- **운동** — 수영, 달리기, 등산. 몸 쓰는 건 다 좋아함
+- **요즘 관심사** — <!-- 뭐든 -->
+
+---
+
+### Contact
+
+- **Email**: [tjseoster@gmail.com](mailto:tjseoster@gmail.com)
+- **GitHub**: [@xemotion](https://github.com/xemotion)
