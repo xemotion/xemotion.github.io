@@ -20,4 +20,8 @@ export const SITE = {
   dir: "ltr",
   lang: "en",
   timezone: "Asia/Seoul",
+  // GoatCounter analytics — fill in your subdomain after signing up at
+  // https://www.goatcounter.com/signup (e.g. "xemotion" → xemotion.goatcounter.com).
+  // Leave empty to disable tracking entirely.
+  goatCounter: "",
 } as const;

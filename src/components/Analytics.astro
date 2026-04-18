@@ -1,0 +1,28 @@
+---
+/**
+ * GoatCounter analytics.
+ *
+ * - Privacy-friendly, no cookies, no personal data.
+ * - Only loads in production builds so local dev doesn't pollute stats.
+ * - Set SITE.goatCounter in src/config.ts to your subdomain to enable.
+ *   Free signup: https://www.goatcounter.com/signup
+ * - View stats at https://<your-subdomain>.goatcounter.com
+ */
+import { SITE } from "@/config";
+
+const enabled = import.meta.env.PROD && SITE.goatCounter;
+const endpoint = enabled
+  ? `https://${SITE.goatCounter}.goatcounter.com/count`
+  : null;
+---
+
+{
+  endpoint && (
+    <script
+      is:inline
+      data-goatcounter={endpoint}
+      async
+      src="//gc.zgo.at/count.js"
+    />
+  )
+}
